@@ -1,0 +1,19 @@
+# Flash translation layer disk driver configuration options
+
+config DISK_DRIVER_FTL
+	bool "Flash translation layer"
+	default y
+	depends on DT_HAS_ZEPHYR_FTL_DHARA_ENABLED
+	depends on DISK_DRIVERS
+	select FLASH_EX_OP_ENABLED
+	help
+	  Enable flash translation layer disk driver for NAND flashes. Only the Dhara implementation
+	  is currently available.
+
+if DISK_DRIVER_FTL
+
+module = DISK_FTL
+module-str = disk_ftl
+source "subsys/logging/Kconfig.template.log_config"
+
+endif # DISK_DRIVER_FTL
