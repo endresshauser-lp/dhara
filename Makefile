@@ -22,15 +22,9 @@ TESTS = \
     tests/recovery.test \
     tests/jfill.test \
     tests/map.test \
-    tests/bch.test \
-    tests/hamming.test \
-    tests/epoch_roll.test \
-    tests/crc32.test
-TOOLS = \
-    tools/gftool \
-    tools/gentab
+    tests/epoch_roll.test
 
-all: $(TESTS) $(TOOLS)
+all: $(TESTS)
 
 test: $(TESTS)
 	@@for x in $(TESTS); do echo $$x; ./$$x > /dev/null || exit 255; done
@@ -62,21 +56,6 @@ tests/map.test: dhara/map.o dhara/journal.o dhara/error.o tests/map.o \
 
 tests/epoch_roll.test: dhara/map.o dhara/journal.o dhara/error.o \
 		       tests/epoch_roll.o tests/sim.o tests/util.o
-	$(CC) -o $@ $^
-
-tests/bch.test: ecc/bch.o ecc/gf13.o tests/bch.o
-	$(CC) -o $@ $^
-
-tests/hamming.test: ecc/hamming.o tests/hamming.o
-	$(CC) -o $@ $^
-
-tests/crc32.test: ecc/crc32.o tests/crc32.o
-	$(CC) -o $@ $^
-
-tools/gftool: tools/gftool.o
-	$(CC) -o $@ $^
-
-tools/gentab: tools/gentab.o
 	$(CC) -o $@ $^
 
 clean:

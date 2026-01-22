@@ -33,9 +33,7 @@ advantage of extra hardware features where available. In particular:
   * It can take advantage of internally buffered copy operations, if the
     NAND chip supports these.
 
-  * It can make use of NAND chip's on-board ECC, if available. If
-    software ECC is required, implementations of Hamming and BCH codes
-    are provided in the source distribution (see the ecc/ directory).
+  * It can make use of NAND chip's on-board ECC, if available.
 
   * It does not require partial page programmability. However, if the
     functionality is present, then it can be taken advantage of by
@@ -98,8 +96,3 @@ errors. Uncorrectable errors *must* be detected in order for the data
 integrity guarantees to be valid. This may require the use of a checksum
 in addition to ECC. If this is done, ensure that the checksum bytes are
 also protected by ECC!
-
-Implementations of two popular ECC mechanisms (Hamming and BCH) can be
-found in the ecc/ subdirectory. Each implements ECC over variable-sized
-chunks (256 or 512 bytes are typical sizes). Multiple ECC chunks may be
-required per page.
